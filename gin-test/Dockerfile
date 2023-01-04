@@ -1,11 +1,10 @@
 FROM golang:1.17.7-alpine
 
-RUN mkdir /go/src/work
 WORKDIR /go/src/work
+COPY . .
 
 # Air導入
-RUN apk update &&  apk add git
-RUN go get github.com/cosmtrek/air@v1.29.0
-CMD ["air", "-c", ".air.toml"]
+RUN apk update &&  apk add --no-cache git
+RUN go get github.com/cosmtrek/air@v1.29.0 && go build -o /go/bin/air github.com/cosmtrek/air
 
-ADD . /go/src/work
+CMD ["air", "-c", ".air.toml"]
