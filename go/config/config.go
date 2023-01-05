@@ -1,9 +1,9 @@
 package config
 
 import (
-	"log"
-
+	"go/utils"
 	"gopkg.in/ini.v1"
+	"log"
 )
 
 type ConfigList struct {
@@ -17,6 +17,7 @@ var Config ConfigList
 
 func init() {
 	LoadConfig()
+	utils.LoggingSettings(Config.LogFile)
 }
 
 func LoadConfig() {
